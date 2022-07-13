@@ -1,0 +1,122 @@
+name: .NET
+
+on:
+  push:
+
+jobs:
+  build:
+
+    runs-on: ubuntu-latest
+
+    steps:
+    - uses: actions/checkout@v2
+    - name: Setup .NET
+      uses: actions/setup-dotnet@v1
+      with:
+        dotnet-version: 6.0.x
+        include-prerelease: false
+
+     # Add NuGet Sources
+
+    - name: Create Local NuGet Directory
+      run: mkdir ~/nuget
+
+    - name: Add Local Nuget Source
+      run: dotnet nuget add source ~/nuget
+
+    - name: Add GGroupp NuGet Source
+      run: dotnet nuget add source ${{ secrets.GGROUPP_NUGET_SOURCE_URL }} -n ggroupp -u ${{ secrets.GGROUPP_NUGET_SOURCE_USER_NAME }} -p ${{ secrets.GGROUPP_NUGET_SOURCE_USER_PASSWORD }} --store-password-in-clear-text
+
+    # Api.Abstractions.IssuerSigningKey
+
+    - name: Restore Api.Abstractions.IssuerSigningKey
+      run: dotnet restore ./src/*/*/Api.Abstractions.IssuerSigningKey.csproj
+
+    - name: Build Api.Abstractions.IssuerSigningKey
+      run: dotnet build ./src/*/*/Api.Abstractions.IssuerSigningKey.csproj --no-restore  -c Release
+
+    - name: Pack Api.Abstractions.IssuerSigningKey
+      run: dotnet pack ./src/*/*/Api.Abstractions.IssuerSigningKey.csproj --no-restore -o ~/nuget  -c Release
+
+    # Api.Abstractions.SigningCredentials
+
+    - name: Restore Api.Abstractions.SigningCredentials
+      run: dotnet restore ./src/*/*/Api.Abstractions.SigningCredentials.csproj
+
+    - name: Build Api.Abstractions.SigningCredentials
+      run: dotnet build ./src/*/*/Api.Abstractions.SigningCredentials.csproj --no-restore  -c Release
+
+    - name: Pack Api.Abstractions.SigningCredentials
+      run: dotnet pack ./src/*/*/Api.Abstractions.SigningCredentials.csproj --no-restore -o ~/nuget  -c Release
+
+    # Api.Asymmetric.Rsa
+
+    - name: Restore Api.Asymmetric.Rsa
+      run: dotnet restore ./src/*/*/Api.Asymmetric.Rsa.csproj
+
+    - name: Build Api.Asymmetric.Rsa
+      run: dotnet build ./src/*/*/Api.Asymmetric.Rsa.csproj --no-restore  -c Release
+
+    - name: Pack Api.Asymmetric.Rsa
+      run: dotnet pack ./src/*/*/Api.Asymmetric.Rsa.csproj --no-restore -o ~/nuget  -c Release
+
+    # Create.Api.Abstractions
+
+    - name: Restore Create.Api.Abstractions
+      run: dotnet restore ./src/*/*/Create.Api.Abstractions.csproj
+
+    - name: Build Create.Api.Abstractions
+      run: dotnet build ./src/*/*/Create.Api.Abstractions.csproj --no-restore  -c Release
+
+    - name: Pack Create.Api.Abstractions
+      run: dotnet pack ./src/*/*/Create.Api.Abstractions.csproj --no-restore -o ~/nuget  -c Release
+
+    # Create.Api.Jwt
+
+    - name: Restore Create.Api.Jwt
+      run: dotnet restore ./src/*/*/Create.Api.Jwt.csproj
+
+    - name: Build Create.Api.Jwt
+      run: dotnet build ./src/*/*/Create.Api.Jwt.csproj --no-restore  -c Release
+
+    - name: Pack Create.Api.Jwt
+      run: dotnet pack ./src/*/*/Create.Api.Jwt.csproj --no-restore -o ~/nuget  -c Release
+
+    # Validate.Api.Abstractions
+
+    - name: Restore Validate.Api.Abstractions
+      run: dotnet restore ./src/*/*/Validate.Api.Abstractions.csproj
+
+    - name: Build Validate.Api.Abstractions
+      run: dotnet build ./src/*/*/Validate.Api.Abstractions.csproj --no-restore  -c Release
+
+    - name: Pack Validate.Api.Abstractions
+      run: dotnet pack ./src/*/*/Validate.Api.Abstractions.csproj --no-restore -o ~/nuget  -c Release
+
+    # Validate.Api.Jwt
+
+    - name: Restore Validate.Api.Jwt
+      run: dotnet restore ./src/*/*/Validate.Api.Jwt.csproj
+
+    - name: Build Validate.Api.Jwt
+      run: dotnet build ./src/*/*/Validate.Api.Jwt.csproj --no-restore  -c Release
+
+    - name: Pack Validate.Api.Jwt
+      run: dotnet pack ./src/*/*/Validate.Api.Jwt.csproj --no-restore -o ~/nuget  -c Release
+
+    # Middleware.Jwt
+
+    - name: Restore Middleware.Jwt
+      run: dotnet restore ./src/*/*/Middleware.Jwt.csproj
+
+    - name: Build Middleware.Jwt
+      run: dotnet build ./src/*/*/Middleware.Jwt.csproj --no-restore  -c Release
+
+    - name: Pack Middleware.Jwt
+      run: dotnet pack ./src/*/*/Middleware.Jwt.csproj --no-restore -o ~/nuget  -c Release
+
+    # Push
+
+    - name: Push Packages
+      if: ${{ github.ref == 'refs/heads/main' }}
+      run: dotnet nuget push "../../../nuget/*.nupkg" -s ${{ secrets.GGROUPP_NUGET_SOURCE_URL }} -k ${{ secrets.GGROUPP_NUGET_SOURCE_USER_PASSWORD }} --skip-duplicate
