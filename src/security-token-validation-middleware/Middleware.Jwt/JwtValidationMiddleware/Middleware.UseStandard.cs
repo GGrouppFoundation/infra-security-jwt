@@ -8,11 +8,11 @@ namespace Microsoft.AspNetCore.Builder;
 
 partial class JwtValidationMiddleware
 {
-    public static IApplicationBuilder UseStandardJwtValidation(this IApplicationBuilder appBuilder)
+    public static TApplicationBuilder UseStandardJwtValidation<TApplicationBuilder>(this TApplicationBuilder appBuilder!!)
+        where TApplicationBuilder : class, IApplicationBuilder
     {
-        _ = appBuilder ?? throw new ArgumentNullException(nameof(appBuilder));
-
-        return appBuilder.Use(static next => context => context.InvokeJwtValidationAsync(next, GetStandardValidationApi));
+        _ = appBuilder.Use(static next => context => context.InvokeJwtValidationAsync(next, GetStandardValidationApi));
+        return appBuilder;
     }
 
     private static ISecurityTokenValidateSupplier<JwtSecurityToken> GetStandardValidationApi(IServiceProvider serviceProvider)
