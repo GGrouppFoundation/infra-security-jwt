@@ -7,7 +7,7 @@ namespace GGroupp.Infra;
 
 partial class JwtValidationSwaggerConfigurator
 {
-    public static void Configure(OpenApiDocument openApiDocument)
+    internal static void Configure(OpenApiDocument openApiDocument)
     {
         if (openApiDocument is null)
         {
@@ -16,11 +16,6 @@ partial class JwtValidationSwaggerConfigurator
 
         openApiDocument.Components ??= new();
         openApiDocument.Components.SecuritySchemes ??= new Dictionary<string, OpenApiSecurityScheme>();
-
-        if (openApiDocument.Components.SecuritySchemes.ContainsKey(SecuritySchemeKey))
-        {
-            throw new InvalidOperationException($"{SecuritySchemeKey} schema has already existed");
-        }
 
         openApiDocument.Components.SecuritySchemes[SecuritySchemeKey] = new()
         {
@@ -46,9 +41,6 @@ partial class JwtValidationSwaggerConfigurator
             [referenceScurityScheme] = Array.Empty<string>()
         };
 
-        openApiDocument.SecurityRequirements ??= new List<OpenApiSecurityRequirement>();
-        openApiDocument.SecurityRequirements.Add(securityRequirement);
-
         if (openApiDocument.Paths?.Count is not > 0)
         {
             return;
@@ -56,6 +48,9 @@ partial class JwtValidationSwaggerConfigurator
 
         foreach (var path in openApiDocument.Paths.Values.SelectMany(GetOperations))
         {
+            path.Security ??= new List<OpenApiSecurityRequirement>();
+            path.Security.Add(securityRequirement);
+
             path.Responses ??= new OpenApiResponses();
             if (path.Responses.ContainsKey(UnauthorizedCode))
             {

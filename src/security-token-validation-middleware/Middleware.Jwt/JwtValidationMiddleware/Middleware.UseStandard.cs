@@ -8,10 +8,16 @@ namespace Microsoft.AspNetCore.Builder;
 
 partial class JwtValidationMiddleware
 {
-    public static TApplicationBuilder UseStandardJwtValidation<TApplicationBuilder>(this TApplicationBuilder appBuilder!!)
+    public static TApplicationBuilder UseJwtValidation<TApplicationBuilder>(this TApplicationBuilder appBuilder!!)
         where TApplicationBuilder : class, IApplicationBuilder
     {
         _ = appBuilder.Use(static next => context => context.InvokeJwtValidationAsync(next, GetStandardValidationApi));
+
+        if (appBuilder is ISwaggerBuilder swaggerBuilder)
+        {
+            _ = swaggerBuilder.Use(JwtValidationSwaggerConfigurator.Configure);
+        }
+
         return appBuilder;
     }
 
