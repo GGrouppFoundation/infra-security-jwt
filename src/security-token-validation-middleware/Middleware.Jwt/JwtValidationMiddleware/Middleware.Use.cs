@@ -11,6 +11,12 @@ partial class JwtValidationMiddleware
         where TApplicationBuilder : class, IApplicationBuilder
     {
         _ = appBuilder.Use(next => context => context.InvokeJwtValidationAsync(next, validationApiResolver));
+
+        if (appBuilder is ISwaggerBuilder swaggerBuilder)
+        {
+            _ = swaggerBuilder.Use(JwtValidationSwaggerConfigurator.Configure);
+        }
+
         return appBuilder;
     }
 }

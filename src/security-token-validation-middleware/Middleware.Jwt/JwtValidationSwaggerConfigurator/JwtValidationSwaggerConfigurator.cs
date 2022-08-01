@@ -1,12 +1,8 @@
 namespace GGroupp.Infra;
 
-public sealed partial class JwtValidationSwaggerConfigurator : ISwaggerConfigurator
+internal static partial class JwtValidationSwaggerConfigurator
 {
     private const string SecuritySchemeKey = "jwtAuthorization";
 
     private const string UnauthorizedCode = "401";
-
-    private JwtValidationSwaggerConfigurator()
-    {
-    }
 }
