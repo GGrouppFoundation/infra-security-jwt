@@ -5,5 +5,4 @@ public sealed partial class JwtRefreshTokenCreateApi : IRefreshTokenCreateSuppli
     public JwtRefreshTokenCreateApi()
     {
     }
-
 }
