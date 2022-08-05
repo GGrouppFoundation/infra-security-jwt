@@ -60,27 +60,71 @@ jobs:
     - name: Pack Api.Asymmetric.Rsa
       run: dotnet pack ./src/*/*/Api.Asymmetric.Rsa.csproj --no-restore -o ~/nuget  -c Release
 
-    # Create.Api.Abstractions
+    # Access Token Create.Api.Abstractions
 
-    - name: Restore Create.Api.Abstractions
-      run: dotnet restore ./src/*/*/Create.Api.Abstractions.csproj
+    - name: Restore Access Token  Create.Api.Abstractions
+      run: dotnet restore ./src/security-token-create-api/*/Create.Api.Abstractions.csproj
 
-    - name: Build Create.Api.Abstractions
-      run: dotnet build ./src/*/*/Create.Api.Abstractions.csproj --no-restore  -c Release
+    - name: Build Access Token Create.Api.Abstractions
+      run: dotnet build ./src/security-token-create-api/*/Create.Api.Abstractions.csproj --no-restore  -c Release
 
-    - name: Pack Create.Api.Abstractions
-      run: dotnet pack ./src/*/*/Create.Api.Abstractions.csproj --no-restore -o ~/nuget  -c Release
+    - name: Pack  Access Token Create.Api.Abstractions
+      run: dotnet pack ./src/security-token-create-api/*/Create.Api.Abstractions.csproj --no-restore -o ~/nuget  -c Release
 
-    # Create.Api.Jwt
+    # Access Token Create.Api.Jwt
 
-    - name: Restore Create.Api.Jwt
-      run: dotnet restore ./src/*/*/Create.Api.Jwt.csproj
+    - name: Restore Access Token Create.Api.Jwt
+      run: dotnet restore ./src/security-token-create-api/*/Create.Api.Jwt.csproj
 
-    - name: Build Create.Api.Jwt
-      run: dotnet build ./src/*/*/Create.Api.Jwt.csproj --no-restore  -c Release
+    - name: Build Access Token Create.Api.Jwt
+      run: dotnet build ./src/security-token-create-api/*/Create.Api.Jwt.csproj --no-restore  -c Release
 
-    - name: Pack Create.Api.Jwt
-      run: dotnet pack ./src/*/*/Create.Api.Jwt.csproj --no-restore -o ~/nuget  -c Release
+    - name: Pack Access Token Create.Api.Jwt
+      run: dotnet pack ./src/security-token-create-api/*/Create.Api.Jwt.csproj --no-restore -o ~/nuget  -c Release
+
+    # Refresh Token Create.Api.Abstractions
+
+    - name: Restore Refresh Token Create.Api.Abstractions
+      run: dotnet restore ./src/security-refresh-token-create-api/*/Create.Api.Abstractions.csproj
+
+    - name: Build Refresh Token Create.Api.Abstractions
+      run: dotnet build ./src/security-refresh-token-create-api/*/Create.Api.Abstractions.csproj --no-restore  -c Release
+
+    - name: Pack Refresh Token Create.Api.Abstractions
+      run: dotnet pack ./src/security-refresh-token-create-api/*/Create.Api.Abstractions.csproj --no-restore -o ~/nuget  -c Release
+
+    # Refresh Token Create.Api.Jwt
+
+    - name: Restore Refresh Token Create.Api.Jwt
+      run: dotnet restore ./src/security-refresh-token-create-api/*/Create.Api.Jwt.csproj
+
+    - name: Build Refresh Token Create.Api.Jwt
+      run: dotnet build ./src/security-refresh-token-create-api/*/Create.Api.Jwt.csproj --no-restore  -c Release
+
+    - name: Pack Refresh Token Create.Api.Jwt
+      run: dotnet pack ./src/security-refresh-token-create-api/*/Create.Api.Jwt.csproj --no-restore -o ~/nuget  -c Release
+
+    # Get.Api.Abstractions
+
+    - name: Restore Get.Api.Abstractions
+      run: dotnet restore ./src/*/*/Get.Api.Abstractions.csproj
+
+    - name: Build Get.Api.Abstractions
+      run: dotnet build ./src/*/*/Get.Api.Abstractions.csproj --no-restore  -c Release
+
+    - name: Pack Get.Api.Abstractions
+      run: dotnet pack ./src/*/*/Get.Api.Abstractions.csproj --no-restore -o ~/nuget  -c Release
+
+    # Get.Api.Jwt
+
+    - name: Restore Get.Api.Jwt
+      run: dotnet restore ./src/*/*/Get.Api.Jwt.csproj
+
+    - name: Build Get.Api.Jwt
+      run: dotnet build ./src/*/*/Get.Api.Jwt.csproj --no-restore  -c Release
+
+    - name: Pack Get.Api.Jwt
+      run: dotnet pack ./src/*/*/Get.Api.Jwt.csproj --no-restore -o ~/nuget  -c Release
 
     # Validate.Api.Abstractions
 
