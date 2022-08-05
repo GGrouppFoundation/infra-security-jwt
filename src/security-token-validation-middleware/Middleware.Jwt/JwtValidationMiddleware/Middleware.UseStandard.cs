@@ -8,9 +8,11 @@ namespace Microsoft.AspNetCore.Builder;
 
 partial class JwtValidationMiddleware
 {
-    public static TApplicationBuilder UseJwtValidation<TApplicationBuilder>(this TApplicationBuilder appBuilder!!)
+    public static TApplicationBuilder UseJwtValidation<TApplicationBuilder>(this TApplicationBuilder appBuilder)
         where TApplicationBuilder : class, IApplicationBuilder
     {
+        _ = appBuilder ?? throw new ArgumentNullException(nameof(appBuilder));
+
         _ = appBuilder.Use(static next => context => context.InvokeJwtValidationAsync(next, GetStandardValidationApi));
 
         if (appBuilder is ISwaggerBuilder swaggerBuilder)
