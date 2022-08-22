@@ -35,6 +35,8 @@ partial class JwtSecurityTokenValidateApi
             ValidateIssuerSigningKey = true,
             IssuerSigningKey = signingKeyApi.GetIssuerSigningKey(key),
             ValidateIssuer = false,
+            ValidateLifetime = true,
+            LifetimeValidator = option.LifetimeValidator,
             ValidateAudience = false,
             ClockSkew = TimeSpan.Zero
         };
