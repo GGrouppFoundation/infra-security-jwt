@@ -35,6 +35,8 @@ partial class JwtSecurityTokenValidateApi
             ValidateIssuerSigningKey = true,
             IssuerSigningKey = signingKeyApi.GetIssuerSigningKey(key),
             ValidateIssuer = false,
+            ValidateLifetime = true,
+            LifetimeValidator = option.ValidateLifetime ? LifetimeValidator : DefaultLifetimeValidator,
             ValidateAudience = false,
             ClockSkew = TimeSpan.Zero
         };
@@ -50,4 +52,20 @@ partial class JwtSecurityTokenValidateApi
         var jwtSecurityToken = (JwtSecurityToken)securityTokenResult.SecurityToken;
         return Optional.Present(jwtSecurityToken);
     }
+
+    private static bool LifetimeValidator(
+        DateTime? before, 
+        DateTime? expire, 
+        SecurityToken securityToken,
+        TokenValidationParameters _)
+        =>
+        DateTime.UtcNow < before || DateTime.UtcNow < expire;
+
+    private static bool DefaultLifetimeValidator(
+        DateTime? before, 
+        DateTime? expire, 
+        SecurityToken securityToken,
+        TokenValidationParameters _)
+        => 
+        true;
 }
