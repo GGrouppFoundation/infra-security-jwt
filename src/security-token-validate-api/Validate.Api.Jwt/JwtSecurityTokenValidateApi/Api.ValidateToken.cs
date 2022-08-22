@@ -56,15 +56,16 @@ partial class JwtSecurityTokenValidateApi
     private static bool LifetimeValidator(
         DateTime? before, 
         DateTime? expire, 
-        SecurityToken _,
-        TokenValidationParameters __)
+        SecurityToken securityToken,
+        TokenValidationParameters _)
         =>
         DateTime.UtcNow < before || DateTime.UtcNow < expire;
 
     private static bool DefaultLifetimeValidator(
         DateTime? before, 
         DateTime? expire, 
-        SecurityToken token,
-        TokenValidationParameters parameters)
-        => true;
+        SecurityToken securityToken,
+        TokenValidationParameters _)
+        => 
+        true;
 }
