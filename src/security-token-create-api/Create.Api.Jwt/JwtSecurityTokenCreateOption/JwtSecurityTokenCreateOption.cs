@@ -1,14 +1,16 @@
+using System;
+
 namespace GGroupp.Infra;
 
 public sealed record class JwtSecurityTokenCreateOption
 {
-    public JwtSecurityTokenCreateOption(int expiresDays, string privateKeyBase64)
+    public JwtSecurityTokenCreateOption(TimeSpan ttl, string privateKeyBase64)
     {
-        ExpiresDays = expiresDays;
+        Ttl = ttl;
         PrivateKeyBase64 = privateKeyBase64 ?? string.Empty;
     }
 
-    public int ExpiresDays { get; }
+    public TimeSpan Ttl { get; }
 
     public string PrivateKeyBase64 { get; }
 }

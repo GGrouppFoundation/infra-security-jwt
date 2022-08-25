@@ -15,7 +15,7 @@ partial class JwtSecurityTokenCreateApi
         var tokenDescriptor = new SecurityTokenDescriptor
         {
             Subject = claimsIdentity,
-            Expires = DateTime.UtcNow.AddDays(option.ExpiresDays),
+            Expires = DateTime.UtcNow + option.Ttl,
             SigningCredentials = signingCredentialsApi.GetSigningCredentials(key)
         };
 
