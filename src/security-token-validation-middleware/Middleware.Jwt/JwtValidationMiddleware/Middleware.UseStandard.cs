@@ -31,7 +31,11 @@ partial class JwtValidationMiddleware
         .Resolve(serviceProvider);
 
     private static JwtValidationOption GetStandardJwtValidationOption(this IServiceProvider serviceProvider)
-        =>
-        new(
-            pubicKeyBase64: serviceProvider.GetServiceOrThrow<IConfiguration>()["Jwt:PubicKeyBase64"]);
+    {
+        var section = serviceProvider.GetServiceOrThrow<IConfiguration>().GetRequiredSection("Jwt");
+
+        return new(
+            pubicKeyBase64: section.GetValue<string>("PubicKeyBase64") ?? string.Empty,
+            validateLifetime: section.GetValue<bool>("ValidateLifetime", true));
+    }
 }
