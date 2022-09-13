@@ -52,15 +52,22 @@ partial class JwtValidationSwaggerConfigurator
             path.Security.Add(securityRequirement);
 
             path.Responses ??= new OpenApiResponses();
-            if (path.Responses.ContainsKey(UnauthorizedCode))
+
+            if (path.Responses.ContainsKey(UnauthorizedCode) is false)
             {
-                continue;
+                path.Responses[UnauthorizedCode] = new()
+                {
+                    Description = "Unauthorized"
+                };
             }
 
-            path.Responses[UnauthorizedCode] = new()
+            if (path.Responses.ContainsKey(ForbiddenCode) is false)
             {
-                Description = "Unauthorized"
-            };
+                path.Responses[ForbiddenCode] = new()
+                {
+                    Description = "Forbidden"
+                };
+            }
         }
     }
 
