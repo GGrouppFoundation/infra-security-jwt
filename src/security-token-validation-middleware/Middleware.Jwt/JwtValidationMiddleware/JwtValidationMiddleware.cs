@@ -17,13 +17,25 @@ public static partial class JwtValidationMiddleware
         this HttpContext context, RequestDelegate next,
         Func<IServiceProvider, ISecurityTokenValidateSupplier<JwtSecurityToken>> validationApiResolver)
     {
-        var tokenResult = await context.GetAuthValue().FlatMap(context.GetBearerValue).FlatMapValueAsync(ValidateAsync);
+        var tokenResult = await context.GetAuthValue().Forward(context.GetBearerValue).ForwardValueAsync(ValidateAsync);
 
-        _ = await tokenResult.Map(context.OnSuccess).FoldValueAsync(NextAsync, context.OnFailureAsync);
+        _ = await tokenResult.MapSuccess(context.OnSuccess).FoldValueAsync(NextAsync, context.OnFailureAsync);
 
-        ValueTask<Optional<JwtSecurityToken>> ValidateAsync(string token)
+        async ValueTask<Result<JwtSecurityToken, JwtValidationFailureCode>> ValidateAsync(string token)
+        {
+            var validationApi = validationApiResolver.Invoke(context.RequestServices); 
+            var result = await validationApi.ValidateTokenAsync(token, context.RequestAborted).ConfigureAwait(false);
+
+            return result.Fold(ToSuccess, GetInvalidTokenFailureCode);
+        }
+
+        static Result<JwtSecurityToken, JwtValidationFailureCode> ToSuccess(JwtSecurityToken token)
             =>
-            validationApiResolver.Invoke(context.RequestServices).ValidateTokenAsync(token, context.RequestAborted);
+            token;
+
+        static Result<JwtSecurityToken, JwtValidationFailureCode> GetInvalidTokenFailureCode()
+            =>
+            JwtValidationFailureCode.InvalidToken;
 
         ValueTask<Unit> NextAsync(Unit _)
             =>
@@ -44,45 +56,50 @@ public static partial class JwtValidationMiddleware
         return default;
     }
 
-    private static ValueTask<Unit> OnFailureAsync(this HttpContext context)
+    private static ValueTask<Unit> OnFailureAsync(this HttpContext context, JwtValidationFailureCode failureCode)
     {
-        context.Response.StatusCode = StatusCodes.Status401Unauthorized;
+        context.Response.StatusCode = failureCode switch
+        {
+            JwtValidationFailureCode.InvalidToken   => StatusCodes.Status401Unauthorized,
+            _                                       => StatusCodes.Status403Forbidden
+        };
+
         return default;
     }
 
-    private static Optional<string?> GetAuthValue(this HttpContext context)
+    private static Result<string, JwtValidationFailureCode> GetAuthValue(this HttpContext context)
     {
         if (context.Request.Headers.TryGetValue("Authorization", out var value))
         {
-            return Optional.Present<string?>(value);
+            return(string)value;
         }
 
         context.GetLogger()?.LogError("Authorization header value must be specified");
-        return default;
+        return JwtValidationFailureCode.NotSpecifiedHeaderValue;
     }
 
-    private static Optional<string> GetBearerValue(this HttpContext context, string? authHeaderValue)
+    private static Result<string, JwtValidationFailureCode> GetBearerValue(this HttpContext context, string? authHeaderValue)
     {
         if (string.IsNullOrWhiteSpace(authHeaderValue))
         {
             context.GetLogger()?.LogError("Authorization header value must be not empty or a white space value");
-            return default;
+            return JwtValidationFailureCode.NotSpecifiedHeaderValue;
         }
 
         var arr = authHeaderValue.Split(' ');
         if (arr.Length is not 2)
         {
             context.GetLogger()?.LogError("Authorization header value '{authHeaderValue}' is invalid", authHeaderValue);
-            return default;
+            return JwtValidationFailureCode.InvalidTypeHeaderValue;
         }
 
         if (string.Equals(BearerSchemaName, arr[0], StringComparison.InvariantCultureIgnoreCase) is false)
         {
             context.GetLogger()?.LogError("Authorization token '{authHeaderValue}' is invalid: the schema must be Bearer", authHeaderValue);
-            return default;
+            return JwtValidationFailureCode.InvalidTypeHeaderValue;
         }
 
-        return Optional.Present(arr[1]);
+        return arr[1];
     }
 
     private static ILogger? GetLogger(this HttpContext context)
