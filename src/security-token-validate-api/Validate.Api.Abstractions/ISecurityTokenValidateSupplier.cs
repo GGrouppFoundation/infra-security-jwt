@@ -8,5 +8,5 @@ namespace GGroupp.Infra;
 public interface ISecurityTokenValidateSupplier<TSecurityToken>
     where TSecurityToken : SecurityToken
 {
-    ValueTask<Optional<TSecurityToken>> ValidateTokenAsync(string token, CancellationToken cancellationToken = default);
+    ValueTask<Result<TSecurityToken, Failure<Unit>>> ValidateTokenAsync(string token, CancellationToken cancellationToken = default);
 }

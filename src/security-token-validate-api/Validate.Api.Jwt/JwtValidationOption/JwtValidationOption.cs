@@ -2,13 +2,9 @@ namespace GGroupp.Infra;
 
 public sealed record class JwtValidationOption
 {
-    public JwtValidationOption(string pubicKeyBase64, bool validateLifetime = true)
-    {
-        PubicKeyBase64 = pubicKeyBase64;
-        ValidateLifetime = validateLifetime;
-    }
+    public JwtValidationOption(string pubicKeyBase64)
+        =>
+        PubicKeyBase64 = pubicKeyBase64 ?? string.Empty;
 
     public string PubicKeyBase64 { get; }
-    
-    public bool ValidateLifetime { get; }
 }
