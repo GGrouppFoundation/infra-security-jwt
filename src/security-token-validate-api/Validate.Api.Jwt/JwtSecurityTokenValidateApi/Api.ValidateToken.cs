@@ -2,30 +2,28 @@ using System;
 using System.IdentityModel.Tokens.Jwt;
 using System.Threading;
 using System.Threading.Tasks;
-using Microsoft.Extensions.Logging;
 using Microsoft.IdentityModel.Tokens;
 
 namespace GGroupp.Infra;
 
 partial class JwtSecurityTokenValidateApi
 {
-    public ValueTask<Optional<JwtSecurityToken>> ValidateTokenAsync(string token, CancellationToken cancellationToken = default)
+    public ValueTask<Result<JwtSecurityToken, Failure<Unit>>> ValidateTokenAsync(string token, CancellationToken cancellationToken = default)
     {
-        if (string.IsNullOrEmpty(token))
-        {
-            logger?.LogError("JWT must be specified");
-            return default;
-        }
-
         if (cancellationToken.IsCancellationRequested)
         {
-            return ValueTask.FromCanceled<Optional<JwtSecurityToken>>(cancellationToken);
+            return ValueTask.FromCanceled<Result<JwtSecurityToken, Failure<Unit>>>(cancellationToken);
+        }
+
+        if (string.IsNullOrEmpty(token))
+        {
+            return new(Failure.Create("JWT is not specified"));
         }
 
         return InnerValidateTokenAsync(token);
     }
 
-    private async ValueTask<Optional<JwtSecurityToken>> InnerValidateTokenAsync(string token)
+    private async ValueTask<Result<JwtSecurityToken, Failure<Unit>>> InnerValidateTokenAsync(string token)
     {
         var tokenHandler = new JwtSecurityTokenHandler();
         var key = Convert.FromBase64String(option.PubicKeyBase64);
@@ -45,12 +43,10 @@ partial class JwtSecurityTokenValidateApi
 
         if (securityTokenResult.IsValid is false)
         {
-            logger?.LogError(securityTokenResult.Exception, "The security token is invalid");
-            return default;
+            return Failure.Create("The security token is invalid");
         }
 
-        var jwtSecurityToken = (JwtSecurityToken)securityTokenResult.SecurityToken;
-        return Optional.Present(jwtSecurityToken);
+        return (JwtSecurityToken)securityTokenResult.SecurityToken;
     }
 
     private static bool LifetimeValidator(

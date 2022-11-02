@@ -7,7 +7,7 @@ namespace GGroupp.Infra;
 
 partial class JwtValidationSwaggerConfigurator
 {
-    internal static void Configure(OpenApiDocument openApiDocument)
+    internal static void Configure(OpenApiDocument openApiDocument, JwtValidationStatusCodes? jwtValidationStatusCodes)
     {
         if (openApiDocument is null)
         {
@@ -46,27 +46,29 @@ partial class JwtValidationSwaggerConfigurator
             return;
         }
 
+        var codeDescriptions = GetCodeDescriptions(jwtValidationStatusCodes);
+
         foreach (var path in openApiDocument.Paths.Values.SelectMany(GetOperations))
         {
             path.Security ??= new List<OpenApiSecurityRequirement>();
             path.Security.Add(securityRequirement);
 
-            path.Responses ??= new OpenApiResponses();
-
-            if (path.Responses.ContainsKey(UnauthorizedCode) is false)
+            if (codeDescriptions.Count is not > 0)
             {
-                path.Responses[UnauthorizedCode] = new()
-                {
-                    Description = "Unauthorized"
-                };
+                continue;
             }
 
-            if (path.Responses.ContainsKey(ForbiddenCode) is false)
+            path.Responses ??= new OpenApiResponses();
+
+            foreach (var codeDescription in codeDescriptions)
             {
-                path.Responses[ForbiddenCode] = new()
+                if (path.Responses.ContainsKey(codeDescription.Key) is false)
                 {
-                    Description = "Forbidden"
-                };
+                    path.Responses[codeDescription.Key] = new()
+                    {
+                        Description = codeDescription.Value
+                    };
+                }
             }
         }
     }

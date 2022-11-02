@@ -2,25 +2,42 @@ using System;
 using System.IdentityModel.Tokens.Jwt;
 using GGroupp.Infra;
 using Microsoft.Extensions.Configuration;
+using Microsoft.OpenApi.Models;
 using PrimeFuncPack;
 
 namespace Microsoft.AspNetCore.Builder;
 
 partial class JwtValidationMiddleware
 {
-    public static TApplicationBuilder UseJwtValidation<TApplicationBuilder>(this TApplicationBuilder appBuilder)
+    public static TApplicationBuilder UseJwtValidation<TApplicationBuilder>(
+        this TApplicationBuilder appBuilder, JwtValidationStatusCodes? jwtValidationStatusCodes = null)
         where TApplicationBuilder : class, IApplicationBuilder
     {
         _ = appBuilder ?? throw new ArgumentNullException(nameof(appBuilder));
 
-        _ = appBuilder.Use(static next => context => context.InvokeJwtValidationAsync(next, GetStandardValidationApi));
+        if (jwtValidationStatusCodes is not null && jwtValidationStatusCodes.Value.NotSpecifiedHeaderValueStatusCode is null)
+        {
+            _ = appBuilder.UseWhen(IsAuthorizationHeaderSpecified, InnerConfigureMiddleware);
+        }
+        else
+        {
+            InnerConfigureMiddleware(appBuilder);
+        }
 
         if (appBuilder is ISwaggerBuilder swaggerBuilder)
         {
-            _ = swaggerBuilder.Use(JwtValidationSwaggerConfigurator.Configure);
+            _ = swaggerBuilder.Use(InnerConfigureSwagger);
         }
 
         return appBuilder;
+
+        void InnerConfigureMiddleware(IApplicationBuilder app)
+            =>
+            appBuilder.Use(next => context => context.InvokeJwtValidationAsync(next, GetStandardValidationApi, jwtValidationStatusCodes));
+
+        void InnerConfigureSwagger(OpenApiDocument openApiDocument)
+            =>
+            JwtValidationSwaggerConfigurator.Configure(openApiDocument, jwtValidationStatusCodes);
     }
 
     private static ISecurityTokenValidateSupplier<JwtSecurityToken> GetStandardValidationApi(IServiceProvider serviceProvider)
@@ -35,7 +52,6 @@ partial class JwtValidationMiddleware
         var section = serviceProvider.GetServiceOrThrow<IConfiguration>().GetRequiredSection("Jwt");
 
         return new(
-            pubicKeyBase64: section.GetValue<string>("PubicKeyBase64") ?? string.Empty,
-            validateLifetime: section.GetValue<bool>("ValidateLifetime", true));
+            pubicKeyBase64: section.GetValue<string>("PubicKeyBase64") ?? string.Empty);
     }
 }
