@@ -7,7 +7,7 @@ partial class RsaExtensions
 {
     internal static RSA ImportPublicKey(this RSA rsa, ReadOnlySpan<byte> privateKey)
     {
-        rsa.ImportRSAPublicKey(privateKey, out var _);
+        rsa.ImportSubjectPublicKeyInfo(privateKey, out var _);
         return rsa;
     }
 }
