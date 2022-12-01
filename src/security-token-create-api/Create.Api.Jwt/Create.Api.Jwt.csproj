@@ -1,21 +1,21 @@
 <Project Sdk="Microsoft.NET.Sdk">
 
   <PropertyGroup>
-    <TargetFramework>net6.0</TargetFramework>
+    <TargetFrameworks>net6.0;net7.0</TargetFrameworks>
     <ImplicitUsings>disable</ImplicitUsings>
     <Nullable>enable</Nullable>
     <InvariantGlobalization>true</InvariantGlobalization>
     <TreatWarningsAsErrors>true</TreatWarningsAsErrors>
     <RootNamespace>GGroupp.Infra</RootNamespace>
     <AssemblyName>GGroupp.Infra.SecurityToken.Create.Api.Jwt</AssemblyName>
-    <Version>1.1.0</Version>
+    <Version>1.2.0</Version>
   </PropertyGroup>
 
   <ItemGroup>
-    <PackageReference Include="GGroupp.Infra.SecurityKey.Api.Abstractions.SigningCredentials" Version="1.0.0" />
-    <PackageReference Include="GGroupp.Infra.SecurityToken.Create.Api.Abstractions" Version="1.0.0" />
+    <PackageReference Include="GGroupp.Infra.SecurityKey.Api.Abstractions.SigningCredentials" Version="1.1.0" />
+    <PackageReference Include="GGroupp.Infra.SecurityToken.Create.Api.Abstractions" Version="1.1.0" />
     <PackageReference Include="PrimeFuncPack.Dependency.Core" Version="2.0.2" />
-    <PackageReference Include="System.IdentityModel.Tokens.Jwt" Version="6.21.0" />
+    <PackageReference Include="System.IdentityModel.Tokens.Jwt" Version="6.25.0" />
   </ItemGroup>
 
 </Project>

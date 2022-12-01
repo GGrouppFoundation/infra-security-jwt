@@ -9,16 +9,15 @@ public static class JwtSecurityTokenValidateApiDependency
     public static Dependency<ISecurityTokenValidateSupplier<JwtSecurityToken>> UseJwtSecurityTokenValidation(
         this Dependency<IIssuerSigningKeyApi, JwtValidationOption> dependency)
     {
-        _ = dependency ?? throw new ArgumentNullException(nameof(dependency));
-
+        ArgumentNullException.ThrowIfNull(dependency);
         return dependency.Fold<ISecurityTokenValidateSupplier<JwtSecurityToken>>(JwtSecurityTokenValidateApi.Create);
     }
 
     public static Dependency<ISecurityTokenValidateSupplier<JwtSecurityToken>> UseJwtSecurityTokenValidation(
         this Dependency<IIssuerSigningKeyApi> dependency, Func<IServiceProvider, JwtValidationOption> optionResolver)
     {
-        _ = dependency ?? throw new ArgumentNullException(nameof(dependency));
-        _ = optionResolver ?? throw new ArgumentNullException(nameof(optionResolver));
+        ArgumentNullException.ThrowIfNull(dependency);
+        ArgumentNullException.ThrowIfNull(optionResolver);
 
         return dependency.With(optionResolver).Fold<ISecurityTokenValidateSupplier<JwtSecurityToken>>(JwtSecurityTokenValidateApi.Create);
     }

@@ -6,8 +6,8 @@ internal sealed partial class JwtSecurityTokenCreateApi : ISecurityTokenCreateSu
 {
     public static JwtSecurityTokenCreateApi Create(ISigningCredentialsApi signingCredentialsApi, JwtSecurityTokenCreateOption option)
     {
-        _ = signingCredentialsApi ?? throw new ArgumentNullException(nameof(signingCredentialsApi));
-        _ = option ?? throw new ArgumentNullException(nameof(option));
+        ArgumentNullException.ThrowIfNull(signingCredentialsApi);
+        ArgumentNullException.ThrowIfNull(option);
 
         return new(signingCredentialsApi, option);
     }

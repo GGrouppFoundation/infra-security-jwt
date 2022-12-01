@@ -13,7 +13,7 @@ partial class JwtValidationMiddleware
         this TApplicationBuilder appBuilder, JwtValidationStatusCodes? jwtValidationStatusCodes = null)
         where TApplicationBuilder : class, IApplicationBuilder
     {
-        _ = appBuilder ?? throw new ArgumentNullException(nameof(appBuilder));
+        ArgumentNullException.ThrowIfNull(appBuilder);
 
         if (jwtValidationStatusCodes is not null && jwtValidationStatusCodes.Value.NotSpecifiedHeaderValueStatusCode is null)
         {

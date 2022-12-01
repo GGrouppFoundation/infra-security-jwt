@@ -7,8 +7,8 @@ internal sealed partial class JwtSecurityTokenValidateApi : ISecurityTokenValida
 {
     public static JwtSecurityTokenValidateApi Create(IIssuerSigningKeyApi signingKeyApi, JwtValidationOption option)
     {
-        _ = signingKeyApi ?? throw new ArgumentNullException(nameof(signingKeyApi));
-        _ = option ?? throw new ArgumentNullException(nameof(option));
+        ArgumentNullException.ThrowIfNull(signingKeyApi);
+        ArgumentNullException.ThrowIfNull(option);
 
         return new(signingKeyApi, option);
     }
