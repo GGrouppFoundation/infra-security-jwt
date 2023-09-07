@@ -12,7 +12,7 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <PackageReference Include="GarageGroup.Infra.RefreshToken.Create.Api.Abstractions" Version="1.1.0" />
+    <PackageReference Include="GarageGroup.Infra.RefreshToken.Create.Api.Abstractions" Version="1.1.1" />
   </ItemGroup>
 
 </Project>
