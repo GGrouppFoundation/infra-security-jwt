@@ -6,14 +6,14 @@
     <Nullable>enable</Nullable>
     <InvariantGlobalization>true</InvariantGlobalization>
     <TreatWarningsAsErrors>true</TreatWarningsAsErrors>
-    <RootNamespace>GGroupp.Infra</RootNamespace>
-    <AssemblyName>GGroupp.Infra.SecurityKey.Api.Asymmetric.Rsa</AssemblyName>
-    <Version>1.1.1</Version>
+    <RootNamespace>GarageGroup.Infra</RootNamespace>
+    <AssemblyName>GarageGroup.Infra.SecurityKey.Api.Asymmetric.Rsa</AssemblyName>
+    <Version>1.1.2</Version>
   </PropertyGroup>
 
   <ItemGroup>
-    <PackageReference Include="GGroupp.Infra.SecurityKey.Api.Abstractions.IssuerSigningKey" Version="1.1.0" />
-    <PackageReference Include="GGroupp.Infra.SecurityKey.Api.Abstractions.SigningCredentials" Version="1.1.0" />
+    <PackageReference Include="GarageGroup.Infra.SecurityKey.Api.Abstractions.IssuerSigningKey" Version="1.1.1" />
+    <PackageReference Include="GarageGroup.Infra.SecurityKey.Api.Abstractions.SigningCredentials" Version="1.1.1" />
   </ItemGroup>
 
 </Project>

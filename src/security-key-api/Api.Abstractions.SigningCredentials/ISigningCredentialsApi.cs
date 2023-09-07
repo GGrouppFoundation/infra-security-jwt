@@ -1,7 +1,7 @@
 using System;
 using Microsoft.IdentityModel.Tokens;
 
-namespace GGroupp.Infra;
+namespace GarageGroup.Infra;
 
 public interface ISigningCredentialsApi
 {

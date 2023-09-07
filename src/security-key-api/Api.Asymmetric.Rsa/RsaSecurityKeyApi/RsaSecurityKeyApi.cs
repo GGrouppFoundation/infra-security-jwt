@@ -1,6 +1,6 @@
 using System.Security.Cryptography;
 
-namespace GGroupp.Infra;
+namespace GarageGroup.Infra;
 
 public sealed partial class RsaSecurityKeyApi : IIssuerSigningKeyApi, ISigningCredentialsApi
 {

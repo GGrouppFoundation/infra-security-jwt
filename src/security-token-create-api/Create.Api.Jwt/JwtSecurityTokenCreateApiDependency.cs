@@ -1,7 +1,7 @@
 using System;
 using PrimeFuncPack;
 
-namespace GGroupp.Infra;
+namespace GarageGroup.Infra;
 
 public static class JwtSecurityTokenCreateApiDependency
 {

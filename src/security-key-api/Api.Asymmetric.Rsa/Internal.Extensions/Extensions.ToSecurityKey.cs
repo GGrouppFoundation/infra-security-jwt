@@ -1,7 +1,7 @@
 using System.Security.Cryptography;
 using Microsoft.IdentityModel.Tokens;
 
-namespace GGroupp.Infra;
+namespace GarageGroup.Infra;
 
 partial class RsaExtensions
 {

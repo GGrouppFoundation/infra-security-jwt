@@ -6,13 +6,13 @@
     <Nullable>enable</Nullable>
     <InvariantGlobalization>true</InvariantGlobalization>
     <TreatWarningsAsErrors>true</TreatWarningsAsErrors>
-    <RootNamespace>GGroupp.Infra</RootNamespace>
-    <AssemblyName>GGroupp.Infra.RefreshToken.RefreshToken.Create.Api.Jwt</AssemblyName>
-    <Version>1.1.0</Version>
+    <RootNamespace>GarageGroup.Infra</RootNamespace>
+    <AssemblyName>GarageGroup.Infra.RefreshToken.RefreshToken.Create.Api.Jwt</AssemblyName>
+    <Version>1.1.1</Version>
   </PropertyGroup>
 
   <ItemGroup>
-    <PackageReference Include="GGroupp.Infra.RefreshToken.Create.Api.Abstractions" Version="1.1.0" />
+    <PackageReference Include="GarageGroup.Infra.RefreshToken.Create.Api.Abstractions" Version="1.1.0" />
   </ItemGroup>
 
 </Project>

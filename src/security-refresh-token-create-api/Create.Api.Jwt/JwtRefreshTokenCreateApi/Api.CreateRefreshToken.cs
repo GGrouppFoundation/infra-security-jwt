@@ -1,7 +1,7 @@
 using System;
 using System.Security.Cryptography;
 
-namespace GGroupp.Infra;
+namespace GarageGroup.Infra;
 
 partial class JwtRefreshTokenCreateApi
 {

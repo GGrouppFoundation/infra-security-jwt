@@ -1,6 +1,6 @@
 using System;
 using System.IdentityModel.Tokens.Jwt;
-using GGroupp.Infra;
+using GarageGroup.Infra;
 using Microsoft.OpenApi.Models;
 
 namespace Microsoft.AspNetCore.Builder;

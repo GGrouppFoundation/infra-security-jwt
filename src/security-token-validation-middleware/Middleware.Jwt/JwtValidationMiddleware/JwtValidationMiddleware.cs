@@ -4,7 +4,7 @@ using Microsoft.AspNetCore.Http;
 using System;
 using Microsoft.Extensions.Logging;
 using System.Security.Claims;
-using GGroupp.Infra;
+using GarageGroup.Infra;
 using PrimeFuncPack;
 
 namespace Microsoft.AspNetCore.Builder;
@@ -32,7 +32,7 @@ public static partial class JwtValidationMiddleware
 
         async ValueTask<Result<JwtSecurityToken, Failure<JwtValidationFailureCode>>> ValidateAsync(string token)
         {
-            var validationApi = validationApiResolver.Invoke(context.RequestServices); 
+            var validationApi = validationApiResolver.Invoke(context.RequestServices);
             var result = await validationApi.ValidateTokenAsync(token, context.RequestAborted).ConfigureAwait(false);
 
             return result.MapFailure(MapJwtValidationFailure);
