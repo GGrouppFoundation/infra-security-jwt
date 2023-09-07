@@ -8,11 +8,11 @@
     <TreatWarningsAsErrors>true</TreatWarningsAsErrors>
     <RootNamespace>GarageGroup.Infra</RootNamespace>
     <AssemblyName>GarageGroup.Infra.SecurityToken.Validation.Middleware.Jwt</AssemblyName>
-    <Version>2.1.2</Version>
+    <Version>2.2.0</Version>
   </PropertyGroup>
 
   <ItemGroup>
-    <PackageReference Include="GarageGroup.Infra.SecurityKey.Api.Asymmetric.Rsa" Version="1.1.2" />
+    <PackageReference Include="GarageGroup.Infra.SecurityKey.Api.Asymmetric.Rsa" Version="1.2.0" />
     <PackageReference Include="GarageGroup.Infra.SecurityToken.Validate.Api.Jwt" Version="2.2.0" />
     <PackageReference Include="GarageGroup.Infra.Swagger.Builder.Abstractions" Version="2.1.1" />
     <PackageReference Include="Microsoft.AspNetCore.Http.Abstractions" Version="2.2.0" />
