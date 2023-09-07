@@ -1,6 +1,6 @@
 using System.Security.Claims;
 
-namespace GGroupp.Infra;
+namespace GarageGroup.Infra;
 
 public interface ISecurityTokenCreateSupplier
 {

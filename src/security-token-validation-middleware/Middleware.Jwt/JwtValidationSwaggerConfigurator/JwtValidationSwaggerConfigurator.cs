@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Net;
 
-namespace GGroupp.Infra;
+namespace GarageGroup.Infra;
 
 internal static partial class JwtValidationSwaggerConfigurator
 {

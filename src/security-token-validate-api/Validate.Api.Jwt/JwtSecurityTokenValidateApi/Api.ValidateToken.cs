@@ -4,7 +4,7 @@ using System.Threading;
 using System.Threading.Tasks;
 using Microsoft.IdentityModel.Tokens;
 
-namespace GGroupp.Infra;
+namespace GarageGroup.Infra;
 
 partial class JwtSecurityTokenValidateApi
 {
@@ -50,18 +50,18 @@ partial class JwtSecurityTokenValidateApi
     }
 
     private static bool LifetimeValidator(
-        DateTime? before, 
-        DateTime? expire, 
+        DateTime? before,
+        DateTime? expire,
         SecurityToken securityToken,
         TokenValidationParameters _)
         =>
         DateTime.UtcNow < before || DateTime.UtcNow < expire;
 
     private static bool DefaultLifetimeValidator(
-        DateTime? before, 
-        DateTime? expire, 
+        DateTime? before,
+        DateTime? expire,
         SecurityToken securityToken,
         TokenValidationParameters _)
-        => 
+        =>
         true;
 }

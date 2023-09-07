@@ -6,9 +6,9 @@
     <Nullable>enable</Nullable>
     <InvariantGlobalization>true</InvariantGlobalization>
     <TreatWarningsAsErrors>true</TreatWarningsAsErrors>
-    <RootNamespace>GGroupp.Infra</RootNamespace>
-    <AssemblyName>GGroupp.Infra.RefreshToken.Create.Api.Abstractions</AssemblyName>
-    <Version>1.1.0</Version>
+    <RootNamespace>GarageGroup.Infra</RootNamespace>
+    <AssemblyName>GarageGroup.Infra.RefreshToken.Create.Api.Abstractions</AssemblyName>
+    <Version>1.2.0</Version>
   </PropertyGroup>
 
 </Project>

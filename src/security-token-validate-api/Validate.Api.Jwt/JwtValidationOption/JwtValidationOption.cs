@@ -1,4 +1,4 @@
-namespace GGroupp.Infra;
+namespace GarageGroup.Infra;
 
 public sealed record class JwtValidationOption
 {
@@ -9,6 +9,6 @@ public sealed record class JwtValidationOption
     }
 
     public string PubicKeyBase64 { get; }
-    
+
     public bool ValidateLifetime { get; }
 }

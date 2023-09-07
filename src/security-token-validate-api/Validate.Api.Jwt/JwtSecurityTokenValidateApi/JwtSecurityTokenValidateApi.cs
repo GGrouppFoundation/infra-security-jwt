@@ -1,7 +1,7 @@
 using System;
 using System.IdentityModel.Tokens.Jwt;
 
-namespace GGroupp.Infra;
+namespace GarageGroup.Infra;
 
 internal sealed partial class JwtSecurityTokenValidateApi : ISecurityTokenValidateSupplier<JwtSecurityToken>
 {
