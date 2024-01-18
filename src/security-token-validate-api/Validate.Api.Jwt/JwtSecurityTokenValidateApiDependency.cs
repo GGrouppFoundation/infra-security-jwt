@@ -10,6 +10,7 @@ public static class JwtSecurityTokenValidateApiDependency
         this Dependency<IIssuerSigningKeyApi, JwtValidationOption> dependency)
     {
         ArgumentNullException.ThrowIfNull(dependency);
+
         return dependency.Fold<ISecurityTokenValidateSupplier<JwtSecurityToken>>(JwtSecurityTokenValidateApi.Create);
     }
 
