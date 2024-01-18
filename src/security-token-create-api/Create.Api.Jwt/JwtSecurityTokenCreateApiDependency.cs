@@ -9,6 +9,7 @@ public static class JwtSecurityTokenCreateApiDependency
         this Dependency<ISigningCredentialsApi, JwtSecurityTokenCreateOption> dependency)
     {
         ArgumentNullException.ThrowIfNull(dependency);
+
         return dependency.Fold<ISecurityTokenCreateSupplier>(JwtSecurityTokenCreateApi.Create);
     }
 

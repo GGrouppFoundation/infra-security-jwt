@@ -115,12 +115,14 @@ public static partial class JwtValidationMiddleware
         var arr = authHeaderValue.Split(' ');
         if (arr.Length is not 2)
         {
-            return Failure.Create(JwtValidationFailureCode.InvalidTypeHeaderValue, $"Authorization header value '{authHeaderValue}' is invalid");
+            return Failure.Create(
+                JwtValidationFailureCode.InvalidTypeHeaderValue, $"Authorization header value '{authHeaderValue}' is invalid");
         }
 
         if (string.Equals(BearerSchemaName, arr[0], StringComparison.InvariantCultureIgnoreCase) is false)
         {
-            return Failure.Create(JwtValidationFailureCode.InvalidTypeHeaderValue, $"Authorization token '{authHeaderValue}' is invalid: the schema must be Bearer");
+            return Failure.Create(
+                JwtValidationFailureCode.InvalidTypeHeaderValue, $"Authorization token '{authHeaderValue}' is invalid: the schema must be Bearer");
         }
 
         return arr[1];
