@@ -12,6 +12,8 @@ internal sealed partial class JwtSecurityTokenCreateApi : ISecurityTokenCreateSu
         return new(signingCredentialsApi, option);
     }
 
+    private const string BearerTokenType = "Bearer";
+
     private readonly ISigningCredentialsApi signingCredentialsApi;
 
     private readonly JwtSecurityTokenCreateOption option;
