@@ -20,12 +20,6 @@ partial class JwtSecurityTokenValidateApi
             return new(Failure.Create("JWT is not specified"));
         }
 
-        return InnerValidateTokenAsync(token);
-    }
-
-    private async ValueTask<Result<JwtSecurityToken, Failure<Unit>>> InnerValidateTokenAsync(string token)
-    {
-        var tokenHandler = new JwtSecurityTokenHandler();
         var key = Convert.FromBase64String(option.PubicKeyBase64);
 
         var validationParameters = new TokenValidationParameters
@@ -39,29 +33,34 @@ partial class JwtSecurityTokenValidateApi
             ClockSkew = TimeSpan.Zero
         };
 
-        var securityTokenResult = await tokenHandler.ValidateTokenAsync(token, validationParameters).ConfigureAwait(false);
+        return InnerValidateTokenAsync(token, validationParameters);
 
-        if (securityTokenResult.IsValid is false)
-        {
-            return Failure.Create("The security token is invalid");
-        }
+        static bool LifetimeValidator(DateTime? before, DateTime? expire, SecurityToken securityToken, TokenValidationParameters _)
+            =>
+            DateTime.UtcNow < before || DateTime.UtcNow < expire;
 
-        return (JwtSecurityToken)securityTokenResult.SecurityToken;
+        static bool DefaultLifetimeValidator(DateTime? before, DateTime? expire, SecurityToken securityToken, TokenValidationParameters _)
+            =>
+            true;
     }
 
-    private static bool LifetimeValidator(
-        DateTime? before,
-        DateTime? expire,
-        SecurityToken securityToken,
-        TokenValidationParameters _)
-        =>
-        DateTime.UtcNow < before || DateTime.UtcNow < expire;
+    private async ValueTask<Result<JwtSecurityToken, Failure<Unit>>> InnerValidateTokenAsync(
+        string token, TokenValidationParameters validationParameters)
+    {
+        try
+        {
+            var securityTokenResult = await jwtSecurityTokenHandler.ValidateTokenAsync(token, validationParameters).ConfigureAwait(false);
 
-    private static bool DefaultLifetimeValidator(
-        DateTime? before,
-        DateTime? expire,
-        SecurityToken securityToken,
-        TokenValidationParameters _)
-        =>
-        true;
+            if (securityTokenResult.IsValid is false)
+            {
+                return Failure.Create("The security token is invalid");
+            }
+
+            return (JwtSecurityToken)securityTokenResult.SecurityToken;
+        }
+        catch (Exception ex)
+        {
+            return ex.ToFailure($"An unxpected exception was thrown when trying to validate jwt '{token}'");
+        }
+    }
 }

@@ -10,8 +10,15 @@ public static class JwtSecurityTokenValidateApiDependency
         this Dependency<IIssuerSigningKeyApi, JwtValidationOption> dependency)
     {
         ArgumentNullException.ThrowIfNull(dependency);
+        return dependency.Fold<ISecurityTokenValidateSupplier<JwtSecurityToken>>(CreateApi);
 
-        return dependency.Fold<ISecurityTokenValidateSupplier<JwtSecurityToken>>(JwtSecurityTokenValidateApi.Create);
+        static JwtSecurityTokenValidateApi CreateApi(IIssuerSigningKeyApi signingKeyApi, JwtValidationOption option)
+        {
+            ArgumentNullException.ThrowIfNull(signingKeyApi);
+            ArgumentNullException.ThrowIfNull(option);
+
+            return new(signingKeyApi, option);
+        }
     }
 
     public static Dependency<ISecurityTokenValidateSupplier<JwtSecurityToken>> UseJwtSecurityTokenValidation(
@@ -20,6 +27,14 @@ public static class JwtSecurityTokenValidateApiDependency
         ArgumentNullException.ThrowIfNull(dependency);
         ArgumentNullException.ThrowIfNull(optionResolver);
 
-        return dependency.With(optionResolver).Fold<ISecurityTokenValidateSupplier<JwtSecurityToken>>(JwtSecurityTokenValidateApi.Create);
+        return dependency.Map<ISecurityTokenValidateSupplier<JwtSecurityToken>>(CreateApi);
+
+        JwtSecurityTokenValidateApi CreateApi(IServiceProvider serviceProvider, IIssuerSigningKeyApi signingKeyApi)
+        {
+            ArgumentNullException.ThrowIfNull(serviceProvider);
+            ArgumentNullException.ThrowIfNull(signingKeyApi);
+
+            return new(signingKeyApi, optionResolver.Invoke(serviceProvider));
+        }
     }
 }

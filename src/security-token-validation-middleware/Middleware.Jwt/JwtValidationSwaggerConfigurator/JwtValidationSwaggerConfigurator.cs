@@ -14,7 +14,10 @@ internal static partial class JwtValidationSwaggerConfigurator
     {
         if (jwtValidationStatusCodes is null)
         {
-            return new KeyValuePair<string, string?>[] { new("401", "Unauthorized") };
+            return new KeyValuePair<string, string?>[]
+            {
+                new("401", "Unauthorized")
+            };
         }
 
         return InnerGetCodes(jwtValidationStatusCodes.Value).Distinct().Select(GetCodeDescription).ToArray();
