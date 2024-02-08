@@ -1,4 +1,5 @@
 using System;
+using System.IdentityModel.Tokens.Jwt;
 
 namespace GarageGroup.Infra;
 
@@ -17,6 +18,8 @@ internal sealed partial class JwtSecurityTokenCreateApi : ISecurityTokenCreateSu
     private readonly ISigningCredentialsApi signingCredentialsApi;
 
     private readonly JwtSecurityTokenCreateOption option;
+
+    private readonly JwtSecurityTokenHandler jwtSecurityTokenHandler = new();
 
     private JwtSecurityTokenCreateApi(ISigningCredentialsApi signingCredentialsApi, JwtSecurityTokenCreateOption option)
     {

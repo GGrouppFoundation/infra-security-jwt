@@ -2,6 +2,7 @@ using System;
 using System.IdentityModel.Tokens.Jwt;
 using GarageGroup.Infra;
 using Microsoft.Extensions.Configuration;
+using Microsoft.Extensions.DependencyInjection;
 using Microsoft.OpenApi.Models;
 using PrimeFuncPack;
 
@@ -43,15 +44,11 @@ partial class JwtValidationMiddleware
     private static ISecurityTokenValidateSupplier<JwtSecurityToken> GetStandardValidationApi(IServiceProvider serviceProvider)
         =>
         Dependency.Of<IIssuerSigningKeyApi>(new RsaSecurityKeyApi())
-        .With(GetStandardJwtValidationOption)
-        .UseJwtSecurityTokenValidation()
+        .UseJwtSecurityTokenValidation(GetStandardJwtValidationOption)
         .Resolve(serviceProvider);
 
     private static JwtValidationOption GetStandardJwtValidationOption(this IServiceProvider serviceProvider)
-    {
-        var section = serviceProvider.GetServiceOrThrow<IConfiguration>().GetRequiredSection("Jwt");
-
-        return new(
-            pubicKeyBase64: section.GetValue<string>("PubicKeyBase64") ?? string.Empty);
-    }
+        =>
+        new(
+            pubicKeyBase64: serviceProvider.GetRequiredService<IConfiguration>().GetRequiredSection("Jwt")["PubicKeyBase64"] ?? string.Empty);
 }
