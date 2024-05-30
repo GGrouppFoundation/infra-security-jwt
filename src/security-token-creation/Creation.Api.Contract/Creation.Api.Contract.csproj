@@ -7,13 +7,12 @@
     <InvariantGlobalization>true</InvariantGlobalization>
     <TreatWarningsAsErrors>true</TreatWarningsAsErrors>
     <RootNamespace>GarageGroup.Infra</RootNamespace>
-    <AssemblyName>GarageGroup.Infra.SecurityKey.Api.Asymmetric.Rsa</AssemblyName>
+    <AssemblyName>GarageGroup.Infra.SecurityToken.Creation.Api.Contract</AssemblyName>
     <Version>2.0.0</Version>
   </PropertyGroup>
 
   <ItemGroup>
-    <PackageReference Include="GarageGroup.Infra.SecurityKey.Api.Contract.IssuerSigningKey" Version="2.0.0" />
-    <PackageReference Include="GarageGroup.Infra.SecurityKey.Api.Contract.SigningCredentials" Version="2.0.0" />
+    <PackageReference Include="System.Security.Claims" Version="4.3.0" />
   </ItemGroup>
 
 </Project>
