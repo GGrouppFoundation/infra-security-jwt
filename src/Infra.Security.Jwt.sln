@@ -5,47 +5,30 @@ VisualStudioVersion = 17.0.31903.59
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Key.Api", "Key.Api", "{69936AF1-7705-4866-8960-AD39745EDEF9}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Api.Abstractions.IssuerSigningKey", "security-key-api\Api.Abstractions.IssuerSigningKey\Api.Abstractions.IssuerSigningKey.csproj", "{1D28119D-8183-4193-8DCF-A84D6DBCFD55}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Api.Contract.IssuerSigningKey", "security-key-api\Api.Contract.IssuerSigningKey\Api.Contract.IssuerSigningKey.csproj", "{1D28119D-8183-4193-8DCF-A84D6DBCFD55}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Api.Abstractions.SigningCredentials", "security-key-api\Api.Abstractions.SigningCredentials\Api.Abstractions.SigningCredentials.csproj", "{0B215E17-1B88-4D92-80D3-63C339D12EF9}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Api.Contract.SigningCredentials", "security-key-api\Api.Contract.SigningCredentials\Api.Contract.SigningCredentials.csproj", "{0B215E17-1B88-4D92-80D3-63C339D12EF9}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Api.Asymmetric.Rsa", "security-key-api\Api.Asymmetric.Rsa\Api.Asymmetric.Rsa.csproj", "{6257D6B0-E35E-41B5-9D07-58DE0CCD1B8A}"
 EndProject
-Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "RefreshToken.Create.Api", "RefreshToken.Create.Api", "{6E5DBD88-154E-4D8E-B481-BA8652EDB9DA}"
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Token.Creation", "Token.Creation", "{4C16E356-AC14-4A81-B65D-9EB6B69038F6}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Create.Api.Abstractions", "security-refresh-token-create-api\Create.Api.Abstractions\Create.Api.Abstractions.csproj", "{67C1C85C-376D-4E5C-BF49-D87CE66587D9}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Creation.Api.Contract", "security-token-creation\Creation.Api.Contract\Creation.Api.Contract.csproj", "{EEC445E3-4CF5-4C5D-9FB2-CC2DBBED637E}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Create.Api.Jwt", "security-refresh-token-create-api\Create.Api.Jwt\Create.Api.Jwt.csproj", "{FB576559-7865-41DF-962D-C5F9C41717D5}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Creation.Api.Jwt", "security-token-creation\Creation.Api.Jwt\Creation.Api.Jwt.csproj", "{1D934117-ECC6-47EB-A002-F5CFC44AB6C8}"
 EndProject
-Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Token.Create.Api", "Token.Create.Api", "{4C16E356-AC14-4A81-B65D-9EB6B69038F6}"
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Token.Validation", "Token.Validation", "{442B2407-8AD9-40A3-8474-FC2EAA725A8B}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Create.Api.Abstractions", "security-token-create-api\Create.Api.Abstractions\Create.Api.Abstractions.csproj", "{EEC445E3-4CF5-4C5D-9FB2-CC2DBBED637E}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Validation.Api.Contract", "security-token-validation\Validation.Api.Contract\Validation.Api.Contract.csproj", "{0E08B80B-5BDF-45AB-9436-94E35BDA1CFA}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Create.Api.Jwt", "security-token-create-api\Create.Api.Jwt\Create.Api.Jwt.csproj", "{1D934117-ECC6-47EB-A002-F5CFC44AB6C8}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Validation.Api.Jwt", "security-token-validation\Validation.Api.Jwt\Validation.Api.Jwt.csproj", "{1BC386DD-A9D6-40B8-95BD-BF97019CE294}"
 EndProject
-Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Token.Get.Api", "Token.Get.Api", "{D53D6181-448B-403D-A0AA-11329DC63223}"
-EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Get.Api.Abstractions", "security-token-get-api\Get.Api.Abstractions\Get.Api.Abstractions.csproj", "{13585EAF-4806-40C9-9D37-0AA0F19F3823}"
-EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Get.Api.Jwt", "security-token-get-api\Get.Api.Jwt\Get.Api.Jwt.csproj", "{4F02206F-BF46-4F83-A982-BDC1B505D5D4}"
-EndProject
-Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Token.Validate.Api", "Token.Validate.Api", "{442B2407-8AD9-40A3-8474-FC2EAA725A8B}"
-EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Validate.Api.Abstractions", "security-token-validate-api\Validate.Api.Abstractions\Validate.Api.Abstractions.csproj", "{0E08B80B-5BDF-45AB-9436-94E35BDA1CFA}"
-EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Validate.Api.Jwt", "security-token-validate-api\Validate.Api.Jwt\Validate.Api.Jwt.csproj", "{1BC386DD-A9D6-40B8-95BD-BF97019CE294}"
-EndProject
-Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Token.Validation.Middleware", "Token.Validation.Middleware", "{0346430F-02C4-414B-BDFB-079A3FF965E8}"
-EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Middleware.Jwt", "security-token-validation-middleware\Middleware.Jwt\Middleware.Jwt.csproj", "{4373ED8F-3D72-497B-8982-3E04DE8D06B0}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Validation.Middleware.Jwt", "security-token-validation\Validation.Middleware.Jwt\Validation.Middleware.Jwt.csproj", "{4373ED8F-3D72-497B-8982-3E04DE8D06B0}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
 		Release|Any CPU = Release|Any CPU
-	EndGlobalSection
-	GlobalSection(SolutionProperties) = preSolution
-		HideSolutionNode = FALSE
 	EndGlobalSection
 	GlobalSection(ProjectConfigurationPlatforms) = postSolution
 		{1D28119D-8183-4193-8DCF-A84D6DBCFD55}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
@@ -60,14 +43,6 @@ Global
 		{6257D6B0-E35E-41B5-9D07-58DE0CCD1B8A}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{6257D6B0-E35E-41B5-9D07-58DE0CCD1B8A}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{6257D6B0-E35E-41B5-9D07-58DE0CCD1B8A}.Release|Any CPU.Build.0 = Release|Any CPU
-		{67C1C85C-376D-4E5C-BF49-D87CE66587D9}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{67C1C85C-376D-4E5C-BF49-D87CE66587D9}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{67C1C85C-376D-4E5C-BF49-D87CE66587D9}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{67C1C85C-376D-4E5C-BF49-D87CE66587D9}.Release|Any CPU.Build.0 = Release|Any CPU
-		{FB576559-7865-41DF-962D-C5F9C41717D5}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{FB576559-7865-41DF-962D-C5F9C41717D5}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{FB576559-7865-41DF-962D-C5F9C41717D5}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{FB576559-7865-41DF-962D-C5F9C41717D5}.Release|Any CPU.Build.0 = Release|Any CPU
 		{EEC445E3-4CF5-4C5D-9FB2-CC2DBBED637E}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
 		{EEC445E3-4CF5-4C5D-9FB2-CC2DBBED637E}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{EEC445E3-4CF5-4C5D-9FB2-CC2DBBED637E}.Release|Any CPU.ActiveCfg = Release|Any CPU
@@ -76,14 +51,6 @@ Global
 		{1D934117-ECC6-47EB-A002-F5CFC44AB6C8}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{1D934117-ECC6-47EB-A002-F5CFC44AB6C8}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{1D934117-ECC6-47EB-A002-F5CFC44AB6C8}.Release|Any CPU.Build.0 = Release|Any CPU
-		{13585EAF-4806-40C9-9D37-0AA0F19F3823}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{13585EAF-4806-40C9-9D37-0AA0F19F3823}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{13585EAF-4806-40C9-9D37-0AA0F19F3823}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{13585EAF-4806-40C9-9D37-0AA0F19F3823}.Release|Any CPU.Build.0 = Release|Any CPU
-		{4F02206F-BF46-4F83-A982-BDC1B505D5D4}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{4F02206F-BF46-4F83-A982-BDC1B505D5D4}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{4F02206F-BF46-4F83-A982-BDC1B505D5D4}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{4F02206F-BF46-4F83-A982-BDC1B505D5D4}.Release|Any CPU.Build.0 = Release|Any CPU
 		{0E08B80B-5BDF-45AB-9436-94E35BDA1CFA}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
 		{0E08B80B-5BDF-45AB-9436-94E35BDA1CFA}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{0E08B80B-5BDF-45AB-9436-94E35BDA1CFA}.Release|Any CPU.ActiveCfg = Release|Any CPU
@@ -97,18 +64,17 @@ Global
 		{4373ED8F-3D72-497B-8982-3E04DE8D06B0}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{4373ED8F-3D72-497B-8982-3E04DE8D06B0}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
 	GlobalSection(NestedProjects) = preSolution
 		{1D28119D-8183-4193-8DCF-A84D6DBCFD55} = {69936AF1-7705-4866-8960-AD39745EDEF9}
 		{0B215E17-1B88-4D92-80D3-63C339D12EF9} = {69936AF1-7705-4866-8960-AD39745EDEF9}
 		{6257D6B0-E35E-41B5-9D07-58DE0CCD1B8A} = {69936AF1-7705-4866-8960-AD39745EDEF9}
-		{67C1C85C-376D-4E5C-BF49-D87CE66587D9} = {6E5DBD88-154E-4D8E-B481-BA8652EDB9DA}
-		{FB576559-7865-41DF-962D-C5F9C41717D5} = {6E5DBD88-154E-4D8E-B481-BA8652EDB9DA}
 		{EEC445E3-4CF5-4C5D-9FB2-CC2DBBED637E} = {4C16E356-AC14-4A81-B65D-9EB6B69038F6}
 		{1D934117-ECC6-47EB-A002-F5CFC44AB6C8} = {4C16E356-AC14-4A81-B65D-9EB6B69038F6}
-		{13585EAF-4806-40C9-9D37-0AA0F19F3823} = {D53D6181-448B-403D-A0AA-11329DC63223}
-		{4F02206F-BF46-4F83-A982-BDC1B505D5D4} = {D53D6181-448B-403D-A0AA-11329DC63223}
 		{0E08B80B-5BDF-45AB-9436-94E35BDA1CFA} = {442B2407-8AD9-40A3-8474-FC2EAA725A8B}
 		{1BC386DD-A9D6-40B8-95BD-BF97019CE294} = {442B2407-8AD9-40A3-8474-FC2EAA725A8B}
-		{4373ED8F-3D72-497B-8982-3E04DE8D06B0} = {0346430F-02C4-414B-BDFB-079A3FF965E8}
+		{4373ED8F-3D72-497B-8982-3E04DE8D06B0} = {442B2407-8AD9-40A3-8474-FC2EAA725A8B}
 	EndGlobalSection
 EndGlobal

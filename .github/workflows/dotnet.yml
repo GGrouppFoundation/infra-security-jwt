@@ -33,27 +33,27 @@ jobs:
         -p ${{ secrets.GG_NUGET_SOURCE_USER_PASSWORD }}
         --store-password-in-clear-text
 
-    # Api.Abstractions.IssuerSigningKey
+    # Api.Contract.IssuerSigningKey
 
-    - name: Restore Api.Abstractions.IssuerSigningKey
-      run: dotnet restore ./src/*/*/Api.Abstractions.IssuerSigningKey.csproj
+    - name: Restore Api.Contract.IssuerSigningKey
+      run: dotnet restore ./src/*/*/Api.Contract.IssuerSigningKey.csproj
 
-    - name: Build Api.Abstractions.IssuerSigningKey
-      run: dotnet build ./src/*/*/Api.Abstractions.IssuerSigningKey.csproj --no-restore  -c Release
+    - name: Build Api.Contract.IssuerSigningKey
+      run: dotnet build ./src/*/*/Api.Contract.IssuerSigningKey.csproj --no-restore  -c Release
 
-    - name: Pack Api.Abstractions.IssuerSigningKey
-      run: dotnet pack ./src/*/*/Api.Abstractions.IssuerSigningKey.csproj --no-restore -o ~/nuget  -c Release
+    - name: Pack Api.Contract.IssuerSigningKey
+      run: dotnet pack ./src/*/*/Api.Contract.IssuerSigningKey.csproj --no-restore -o ~/nuget  -c Release
 
-    # Api.Abstractions.SigningCredentials
+    # Api.Contract.SigningCredentials
 
-    - name: Restore Api.Abstractions.SigningCredentials
-      run: dotnet restore ./src/*/*/Api.Abstractions.SigningCredentials.csproj
+    - name: Restore Api.Contract.SigningCredentials
+      run: dotnet restore ./src/*/*/Api.Contract.SigningCredentials.csproj
 
-    - name: Build Api.Abstractions.SigningCredentials
-      run: dotnet build ./src/*/*/Api.Abstractions.SigningCredentials.csproj --no-restore  -c Release
+    - name: Build Api.Contract.SigningCredentials
+      run: dotnet build ./src/*/*/Api.Contract.SigningCredentials.csproj --no-restore  -c Release
 
-    - name: Pack Api.Abstractions.SigningCredentials
-      run: dotnet pack ./src/*/*/Api.Abstractions.SigningCredentials.csproj --no-restore -o ~/nuget  -c Release
+    - name: Pack Api.Contract.SigningCredentials
+      run: dotnet pack ./src/*/*/Api.Contract.SigningCredentials.csproj --no-restore -o ~/nuget  -c Release
 
     # Api.Asymmetric.Rsa
 
@@ -66,104 +66,60 @@ jobs:
     - name: Pack Api.Asymmetric.Rsa
       run: dotnet pack ./src/*/*/Api.Asymmetric.Rsa.csproj --no-restore -o ~/nuget  -c Release
 
-    # Access Token Create.Api.Abstractions
+    # Creation.Api.Contract
 
-    - name: Restore Access Token  Create.Api.Abstractions
-      run: dotnet restore ./src/security-token-create-api/*/Create.Api.Abstractions.csproj
+    - name: Restore Creation.Api.Contract
+      run: dotnet restore ./src/*/*/Creation.Api.Contract.csproj
 
-    - name: Build Access Token Create.Api.Abstractions
-      run: dotnet build ./src/security-token-create-api/*/Create.Api.Abstractions.csproj --no-restore  -c Release
+    - name: Build Creation.Api.Contract
+      run: dotnet build ./src/*/*/Creation.Api.Contract.csproj --no-restore  -c Release
 
-    - name: Pack  Access Token Create.Api.Abstractions
-      run: dotnet pack ./src/security-token-create-api/*/Create.Api.Abstractions.csproj --no-restore -o ~/nuget  -c Release
+    - name: Pack  Creation.Api.Contract
+      run: dotnet pack ./src/*/*/Creation.Api.Contract.csproj --no-restore -o ~/nuget  -c Release
 
-    # Access Token Create.Api.Jwt
+    # Creation.Api.Jwt
 
-    - name: Restore Access Token Create.Api.Jwt
-      run: dotnet restore ./src/security-token-create-api/*/Create.Api.Jwt.csproj
+    - name: Restore Creation.Api.Jwt
+      run: dotnet restore ./src/*/*/Creation.Api.Jwt.csproj
 
-    - name: Build Access Token Create.Api.Jwt
-      run: dotnet build ./src/security-token-create-api/*/Create.Api.Jwt.csproj --no-restore  -c Release
+    - name: Build Creation.Api.Jwt
+      run: dotnet build ./src/*/*/Creation.Api.Jwt.csproj --no-restore  -c Release
 
-    - name: Pack Access Token Create.Api.Jwt
-      run: dotnet pack ./src/security-token-create-api/*/Create.Api.Jwt.csproj --no-restore -o ~/nuget  -c Release
+    - name: Pack Creation.Api.Jwt
+      run: dotnet pack ./src/*/*/Creation.Api.Jwt.csproj --no-restore -o ~/nuget  -c Release
 
-    # Refresh Token Create.Api.Abstractions
+    # Validation.Api.Contract
 
-    - name: Restore Refresh Token Create.Api.Abstractions
-      run: dotnet restore ./src/security-refresh-token-create-api/*/Create.Api.Abstractions.csproj
+    - name: Restore Validation.Api.Contract
+      run: dotnet restore ./src/*/*/Validation.Api.Contract.csproj
 
-    - name: Build Refresh Token Create.Api.Abstractions
-      run: dotnet build ./src/security-refresh-token-create-api/*/Create.Api.Abstractions.csproj --no-restore  -c Release
+    - name: Build Validation.Api.Contract
+      run: dotnet build ./src/*/*/Validation.Api.Contract.csproj --no-restore  -c Release
 
-    - name: Pack Refresh Token Create.Api.Abstractions
-      run: dotnet pack ./src/security-refresh-token-create-api/*/Create.Api.Abstractions.csproj --no-restore -o ~/nuget  -c Release
+    - name: Pack Validation.Api.Contract
+      run: dotnet pack ./src/*/*/Validation.Api.Contract.csproj --no-restore -o ~/nuget  -c Release
 
-    # Refresh Token Create.Api.Jwt
+    # Validation.Api.Jwt
 
-    - name: Restore Refresh Token Create.Api.Jwt
-      run: dotnet restore ./src/security-refresh-token-create-api/*/Create.Api.Jwt.csproj
+    - name: Restore Validation.Api.Jwt
+      run: dotnet restore ./src/*/*/Validation.Api.Jwt.csproj
 
-    - name: Build Refresh Token Create.Api.Jwt
-      run: dotnet build ./src/security-refresh-token-create-api/*/Create.Api.Jwt.csproj --no-restore  -c Release
+    - name: Build Validation.Api.Jwt
+      run: dotnet build ./src/*/*/Validation.Api.Jwt.csproj --no-restore  -c Release
 
-    - name: Pack Refresh Token Create.Api.Jwt
-      run: dotnet pack ./src/security-refresh-token-create-api/*/Create.Api.Jwt.csproj --no-restore -o ~/nuget  -c Release
+    - name: Pack Validation.Api.Jwt
+      run: dotnet pack ./src/*/*/Validation.Api.Jwt.csproj --no-restore -o ~/nuget  -c Release
 
-    # Get.Api.Abstractions
+    # Validation.Middleware.Jwt
 
-    - name: Restore Get.Api.Abstractions
-      run: dotnet restore ./src/*/*/Get.Api.Abstractions.csproj
+    - name: Restore Validation.Middleware.Jwt
+      run: dotnet restore ./src/*/*/Validation.Middleware.Jwt.csproj
 
-    - name: Build Get.Api.Abstractions
-      run: dotnet build ./src/*/*/Get.Api.Abstractions.csproj --no-restore  -c Release
+    - name: Build Validation.Middleware.Jwt
+      run: dotnet build ./src/*/*/Validation.Middleware.Jwt.csproj --no-restore  -c Release
 
-    - name: Pack Get.Api.Abstractions
-      run: dotnet pack ./src/*/*/Get.Api.Abstractions.csproj --no-restore -o ~/nuget  -c Release
-
-    # Get.Api.Jwt
-
-    - name: Restore Get.Api.Jwt
-      run: dotnet restore ./src/*/*/Get.Api.Jwt.csproj
-
-    - name: Build Get.Api.Jwt
-      run: dotnet build ./src/*/*/Get.Api.Jwt.csproj --no-restore  -c Release
-
-    - name: Pack Get.Api.Jwt
-      run: dotnet pack ./src/*/*/Get.Api.Jwt.csproj --no-restore -o ~/nuget  -c Release
-
-    # Validate.Api.Abstractions
-
-    - name: Restore Validate.Api.Abstractions
-      run: dotnet restore ./src/*/*/Validate.Api.Abstractions.csproj
-
-    - name: Build Validate.Api.Abstractions
-      run: dotnet build ./src/*/*/Validate.Api.Abstractions.csproj --no-restore  -c Release
-
-    - name: Pack Validate.Api.Abstractions
-      run: dotnet pack ./src/*/*/Validate.Api.Abstractions.csproj --no-restore -o ~/nuget  -c Release
-
-    # Validate.Api.Jwt
-
-    - name: Restore Validate.Api.Jwt
-      run: dotnet restore ./src/*/*/Validate.Api.Jwt.csproj
-
-    - name: Build Validate.Api.Jwt
-      run: dotnet build ./src/*/*/Validate.Api.Jwt.csproj --no-restore  -c Release
-
-    - name: Pack Validate.Api.Jwt
-      run: dotnet pack ./src/*/*/Validate.Api.Jwt.csproj --no-restore -o ~/nuget  -c Release
-
-    # Middleware.Jwt
-
-    - name: Restore Middleware.Jwt
-      run: dotnet restore ./src/*/*/Middleware.Jwt.csproj
-
-    - name: Build Middleware.Jwt
-      run: dotnet build ./src/*/*/Middleware.Jwt.csproj --no-restore  -c Release
-
-    - name: Pack Middleware.Jwt
-      run: dotnet pack ./src/*/*/Middleware.Jwt.csproj --no-restore -o ~/nuget  -c Release
+    - name: Pack Validation.Middleware.Jwt
+      run: dotnet pack ./src/*/*/Validation.Middleware.Jwt.csproj --no-restore -o ~/nuget  -c Release
 
     # Push
 
